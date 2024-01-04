@@ -8,7 +8,7 @@ import streamlit as st
 import time
 import pickle
 
-with open("/content/drive/MyDrive/BK Ganjil 2023/dataset/hungarian.data", encoding='Latin1') as file:
+with open("dataset/hungarian.data", encoding='Latin1') as file:
   lines = [line.strip() for line in file]
 
 data = itertools.takewhile(
@@ -87,7 +87,7 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open("/content/drive/MyDrive/BK Ganjil 2023/model/knn_model.pkl", 'rb'))
+model = pickle.load(open("model/knn_model.pkl", 'rb'))
 
 y_pred = model.predict(X)
 accuracy = accuracy_score(y, y_pred)
