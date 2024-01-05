@@ -7,7 +7,7 @@ import streamlit as st
 import time
 import pickle
 
-with open("/dataset/hungarian.data", encoding='Latin1') as file:
+with open("dataset/hungarian.data", encoding='Latin1') as file:
   lines = [line.strip() for line in file]
 
 data = itertools.takewhile(
@@ -86,9 +86,9 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open('/model/knn_model.pkl', 'rb'))
-scaler = pickle.load(open('/dataset/scaler_model.pkl', 'rb'))
-model_info = pickle.load(open('/dataset/model_info.pkl', 'rb'))
+model = pickle.load(open('model/knn_model.pkl', 'rb'))
+scaler = pickle.load(open('dataset/scaler_model.pkl', 'rb'))
+model_info = pickle.load(open('dataset/model_info.pkl', 'rb'))
 
 
 accuracy = model_info['accuracy']
