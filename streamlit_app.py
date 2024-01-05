@@ -86,9 +86,9 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open('/content/knn_model.pkl', 'rb'))
-scaler = pickle.load(open('/content/scaler_model.pkl', 'rb'))
-model_info = pickle.load(open('/content/model_info.pkl', 'rb'))
+model = pickle.load(open('/model/knn_model.pkl', 'rb'))
+scaler = pickle.load(open('/dataset/scaler_model.pkl', 'rb'))
+model_info = pickle.load(open('/dataset/model_info.pkl', 'rb'))
 
 
 accuracy = model_info['accuracy']
