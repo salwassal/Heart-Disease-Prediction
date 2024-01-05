@@ -7,7 +7,7 @@ import streamlit as st
 import time
 import pickle
 
-with open("dataset/hungarian.data", encoding='Latin1') as file:
+with open("/content/drive/MyDrive/BK Ganjil 2023/dataset/hungarian.data", encoding='Latin1') as file:
   lines = [line.strip() for line in file]
 
 data = itertools.takewhile(
@@ -86,11 +86,12 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open('model/knn_model.pkl', 'rb'))
+model = pickle.load(open('/content/knn_model.pkl', 'rb'))
+scaler = pickle.load(open('/content/scaler_model.pkl', 'rb'))
+model_info = pickle.load(open('/content/model_info.pkl', 'rb'))
 
-y_pred = model.predict(X)
-accuracy = accuracy_score(y, y_pred)
-accuracy = round((accuracy * 100), 2)
+
+accuracy = model_info['accuracy']
 
 df_final = X
 df_final['target'] = y
@@ -220,7 +221,8 @@ with tab1:
   st.write("")
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
-    prediction = model.predict(inputs)[0]
+    input_scaler = scaler.transform(inputs)
+    prediction = model.predict(input_scaler)[0]
 
     bar = st.progress(0)
     status_text = st.empty()
@@ -264,7 +266,8 @@ with tab2:
 
   if file_uploaded:
     uploaded_df = pd.read_csv(file_uploaded)
-    prediction_arr = model.predict(uploaded_df)
+    inputs_scaler = scaler.transform(uploaded_df)
+    prediction_arr = model.predict(inputs_scaler)
 
     bar = st.progress(0)
     status_text = st.empty()
