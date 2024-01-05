@@ -7,7 +7,7 @@ import streamlit as st
 import time
 import pickle
 
-with open("/content/drive/MyDrive/BK Ganjil 2023/dataset/hungarian.data", encoding='Latin1') as file:
+with open("/dataset/hungarian.data", encoding='Latin1') as file:
   lines = [line.strip() for line in file]
 
 data = itertools.takewhile(
